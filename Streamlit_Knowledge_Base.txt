@@ -1,0 +1,135 @@
+import streamlit as sl
+sl.title("Hi! I am streamlit Web Application")
+sl.header("Hi! I am your header")
+sl.subheader("Hi! I am your subheader")
+sl.text("Hi I am Srikanth, Learning streamlit")
+sl.markdown("This is new *webapplication*")
+sl.markdown("---")
+sl.markdown("[google](https://www.google.com)")
+sl.latex("()")
+json = {"a":"1,2,3","b":"4,5,6"}
+sl.json(json)
+code=""" print("Hello World")"""
+sl.code(code)
+sl.write("## H2")
+import pandas as pd 
+table=pd.DataFrame({"Column 1": [1,2,3,4,5,6,7],"column 2": [1,2,3,4,5,6,7]})
+sl.table(table)
+
+
+
+Status Bar:
+==============================================================
+import streamlit as sl 
+import pandas as pd 
+import time as t 
+from datetime import time
+def converter(value):
+   m,s,mm=value.split(":")
+   s=int(m)*60+int(s)+int(mm)/1000
+   return s
+
+val=sl.time_input("set timer",value=time(0,0,0))
+print(val)
+
+
+if str(val) == "00:00:00":
+    sl.write("Plase set timer")
+else:
+ sec=converter(str(val))
+ per=sec/100
+ p_status=sl.empty()
+ bar=sl.progress(0)
+ for i in range(100):
+    bar.progress((i+1))
+    p_status.write(str(i) + "%")
+    t.sleep(per)
+
+
+
+
+Form / Column Widget
+==================================================================================
+
+sl.markdown("<h1>User Registration</h1>",unsafe_allow_html=True)
+form=sl.form("Form1")
+form.text_input("First Name")
+form.form_submit_button("Submit")
+with sl.form("Form 2"):
+    col1,col2=sl.columns(2)
+    col1.number_input("Employee_ID",value=0)
+    col2.text_input("Employee_Name")
+    sl.form_submit_button("Submit")
+
+
+
+
+sl.markdown("<h1 style='text-align:center;'>User Registration</h1>",unsafe_allow_html=True)
+form=sl.form("Form1")
+form.text_input("First Name")
+form.form_submit_button("Submit")
+with sl.form("Form 2",clear_on_submit=True):
+    col1,col2=sl.columns(2)
+    e_id=col1.number_input("Employee_ID",value=0)
+    col2.text_input("Employee_Name")
+    sl.text_input("DOB")
+    sl.text_input("Specialization")
+    s_state=sl.form_submit_button("Submit")
+    if s_state:
+        if e_id == 100:
+            sl.success("Submitted Successfull")
+        else:
+            sl.warning("Please fill above fields correctly")
+
+
+
+==========================================================================================================================================================
+
+
+
+SideBar & Charts
+===========================================================================================================================================================
+
+
+
+from matplotlib import pyplot as plt
+import numpy as np 
+x=np.linspace(0,10,100)
+sl.title("Generative AI Dashboard")
+sl.header("Generative AI Content")
+sl.subheader("  1) Transformation Models")
+sl.subheader("  2) Tokens")
+sl.subheader("  3) Embedding")
+sl.sidebar.write("Generative AI is generatig content based on the input is given by User")
+opt=sl.sidebar.radio("Select Any Graph",options=(["Line","Bar","H-Bar"]))
+bar=np.array([1,2,3,4,5])
+if opt=="Line":
+ #plt.style.use("http://www.pygal.org/en/stable/documentation/builtin_styles.html#light-solarized")
+ fig=plt.figure()
+ plt.plot(x, np.sin(x))
+ plt.plot(x, np.cos(x),'--')
+ sl.write(fig)
+elif opt=="Bar":
+  fig=plt.figure()
+  plt.bar(bar, bar*10)
+  sl.write(fig)
+
+
+===========================================================================================================================================================
+
+
+Web Scrapper In Stream lit
+===============================
+
+https://unsplash.com/s/photos/{keyword}
+div:ripi6=>figure=>img:YVj9w
+https://unsplash.com/s/photos/autumn
+
+
+
+
+
+
+
+
+
